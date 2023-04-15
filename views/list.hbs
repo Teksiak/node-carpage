@@ -1,0 +1,48 @@
+{{> header}}
+
+
+<div class="m-5">
+    <h2 class="display-6">
+        Car list page
+    </h2>
+
+    {{#if id}}
+        {{#if revert}}
+                <div class="alert alert-success" role="alert">
+                    Restored car with id = {{id}} from database.
+                </div>
+            {{else}}
+                <div class="alert alert-danger" role="alert">
+                    Deleted car with id = {{id}} from database. <br>
+                    <a href="/list/revert" class="btn btn-danger mt-1">Restore</a>
+                </div>
+        {{/if}}
+    {{/if}}
+
+    <table>
+        <tbody>
+            <tr class="border-bottom">
+                <th>ID</th>
+                <th class="text-center p-1 px-4">Ubezpieczony</th>
+                <th class="text-center p-1 px-4">Benzyna</th>
+                <th class="text-center p-1 px-4">Uszkodzony</th>
+                <th class="text-center p-1 px-4">Napęd4x4</th>
+            </tr>
+            {{#each data}}
+                <tr class="border-bottom">
+                    <td>{{_id}}</td>
+                    <td class="text-center p-1">{{formatBool ubezpieczony}}</td>
+                    <td class="text-center p-1">{{formatBool benzyna}}</td>
+                    <td class="text-center p-1">{{formatBool uszkodzony}}</td>
+                    <td class="text-center p-1">{{formatBool naped4x4}}</td>
+                    <td class="text-center p-1 px-2">
+                        <form action="/list/delete" onsubmit="return confirm('Confirm?');" method="GET">
+                            <input type="hidden" name="id" value={{_id}}>
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

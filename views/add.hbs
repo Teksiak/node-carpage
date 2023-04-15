@@ -1,0 +1,20 @@
+{{> header}}
+
+<form action="/addCar/add" method="POST" class="m-5">
+    <h2 class="display-6">
+        Add car page
+    </h2>
+
+    {{#if id}}
+    <div class="alert alert-success" role="alert">
+        New car with id = {{id}} added to database.
+    </div>
+    {{/if}}
+
+    {{#each options}}
+        <input type="checkbox" name="options" value={{this}} class="m-1">
+        {{this}}
+        <br>
+    {{/each}}
+    <input type="submit" value="Add" class="btn btn-dark mt-2">
+</form>

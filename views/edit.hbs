@@ -1,0 +1,49 @@
+{{> header}}
+
+<form action="" onsubmit="return confirm('Confirm?');" method="GET" class="m-5">
+    <h2 class="display-6">
+        Edit/Update cars
+    </h2>
+    <table>
+        <tbody>
+            <tr class="border-bottom">
+                <th>ID</th>
+                <th class="text-center p-1 px-4">Ubezpieczony</th>
+                <th class="text-center p-1 px-4">Benzyna</th>
+                <th class="text-center p-1 px-4">Uszkodzony</th>
+                <th class="text-center p-1 px-4">Napęd4x4</th>
+            </tr>
+            {{#each data}}
+                {{#if (eq this._id ../id)}}
+                    <tr class="border-bottom">
+                        <td>{{_id}}</td>
+                        {{#each ../options}}
+                            <td class="text-center p-1">
+                                <select name={{this}}>
+                                    {{#each ../../select}}
+                                        <option {{formatSelect (eq this (insideValue ../../this ../this))}} value="{{this}}">{{formatBool this}}</option>
+                                    {{/each}}
+                                </select>
+                            </td>
+                        {{/each}}
+                        <td class="text-center p-1 px-2">
+                            <input type="submit" class="btn btn-danger" value="Update" formaction="/edit/confirm?id={{../id}}">
+                            <a class="btn btn-dark" href="/edit">Cancel</a>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr class="border-bottom">
+                        <td>{{_id}}</td>
+                        <td class="text-center p-1">{{formatBool ubezpieczony}}</td>
+                        <td class="text-center p-1">{{formatBool benzyna}}</td>
+                        <td class="text-center p-1">{{formatBool uszkodzony}}</td>
+                        <td class="text-center p-1">{{formatBool naped4x4}}</td>
+                        <td class="text-center p-1 px-2">
+                            <a class="btn btn-dark" href="/edit?id={{_id}}">Edit</a>
+                        </td>
+                    </tr>
+                {{/if}}
+            {{/each}}
+        </tbody>
+    </table>
+</form>

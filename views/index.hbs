@@ -1,0 +1,15 @@
+{{> header}}
+
+<div class="m-5">
+    <h1 class="display-5">Cool car page</h1>
+    <button id="clickme" class="btn btn-dark mt-2">Click</button>
+    <h5 class="mt-1">Number of clicks: <small id="counter" class="text-muted"></small></h5>
+</div>
+
+<script>
+    let n=0
+    document.querySelector('#clickme').addEventListener('click', () => {
+        n += 1
+        document.getElementById('counter').innerHTML = n
+    })
+</script>
